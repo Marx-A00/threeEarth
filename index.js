@@ -13,13 +13,23 @@ document.body.appendChild(renderer.domElement);
 const orbitCtrl = new OrbitControls(camera, renderer.domElement);
 orbitCtrl.enableDamping = true;
 
+const textureLoader = new THREE.TextureLoader();
+
+const starSprite = textureLoader.load('./src/circle.png')
 const geo = new THREE.BoxGeometry(1,1,1);
 const mat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(geo,mat);
 scene.add(cube);
 
+const pointsMat = new THREE.PointsMaterial();
+const points = new THREE.Points(geo, pointsMat);
+scene.add(points);
+
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x080820, 3);
 scene.add(hemiLight);
+
+const stars = getStarfield({ numStars:4500, sprite: starSprite });
+scene.add(stars);
 
 function animate() {
     renderer.render(scene, camera);

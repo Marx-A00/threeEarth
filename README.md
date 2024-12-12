@@ -23,3 +23,6 @@ Demonstration of an interactive globe rendered using Three.js, complete with a s
 
 
 Watch the tutorial on [YouTube](https://youtu.be/tBSzJstOGnM)
+
+## To Run
+- Type: 'live-server' in terminal in project root
