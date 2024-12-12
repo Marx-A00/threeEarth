@@ -20,16 +20,23 @@ const colorMap = textureLoader.load("./src/00_earthmap1k.jpg");
 
 const globeGroup = new THREE.Group();
 scene.add(globeGroup)
-const geo = new THREE.BoxGeometry(1,1,1);
-const mat = new THREE.MeshBasicMaterial({ color: 0x202020, wireframe: true, });
+const geo = new THREE.IcosahedronGeometry(1,10)
+const mat = new THREE.MeshBasicMaterial({
+   color: 0x202020,
+   wireframe: true,
+   transparent: true,
+   opacity: 0.1,
+
+   });
 const cube = new THREE.Mesh(geo,mat);
 globeGroup.add(cube);
 
-const detail = 60;
-const pointsGeo = new THREE.BoxGeometry(1, 1, 1, detail, detail, detail);
+const detail = 80;
+const pointsGeo = new THREE.IcosahedronGeometry(1, detail)
+
 const pointsMat = new THREE.PointsMaterial({
   // color: 0x00ffff,
-  size: 0.04,
+  size: 0.025,
   map: colorMap,
 });
 const points = new THREE.Points(pointsGeo, pointsMat);
