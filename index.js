@@ -16,14 +16,22 @@ orbitCtrl.enableDamping = true;
 const textureLoader = new THREE.TextureLoader();
 
 const starSprite = textureLoader.load('./src/circle.png')
-const geo = new THREE.BoxGeometry(1,1,1);
-const mat = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geo,mat);
-scene.add(cube);
 
-const pointsMat = new THREE.PointsMaterial();
-const points = new THREE.Points(geo, pointsMat);
-scene.add(points);
+const globeGroup = new THREE.Group();
+scene.add(globeGroup)
+const geo = new THREE.BoxGeometry(1,1,1);
+const mat = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true, });
+const cube = new THREE.Mesh(geo,mat);
+globeGroup.add(cube);
+
+const detail = 60;
+const pointsGeo = new THREE.BoxGeometry(1, 1, 1, detail, detail, detail);
+const pointsMat = new THREE.PointsMaterial({
+  color: 0x00ffff,
+  size: 0.02
+});
+const points = new THREE.Points(pointsGeo, pointsMat);
+globeGroup.add(points);
 
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x080820, 3);
 scene.add(hemiLight);
@@ -33,8 +41,8 @@ scene.add(stars);
 
 function animate() {
     renderer.render(scene, camera);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    // globeGroup.rotation.x += 0.01;
+    globeGroup.rotation.y += 0.002;
 
   requestAnimationFrame(animate);
   orbitCtrl.update();
