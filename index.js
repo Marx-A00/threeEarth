@@ -13,6 +13,8 @@ document.body.appendChild(renderer.domElement);
 const orbitCtrl = new OrbitControls(camera, renderer.domElement);
 orbitCtrl.enableDamping = true;
 
+const raycaster = new THREE.Raycaster();
+
 const textureLoader = new THREE.TextureLoader();
 const starSprite = textureLoader.load("./src/circle.png");
 const colorMap = textureLoader.load("./src/04_rainbow1k.jpg");
@@ -89,7 +91,7 @@ scene.add(stars);
 
 function animate() {
   renderer.render(scene, camera);
-  globeGroup.rotation.y += 0.002;
+  globeGroup.rotation.y += 0.001;
 
   requestAnimationFrame(animate);
   orbitCtrl.update();
